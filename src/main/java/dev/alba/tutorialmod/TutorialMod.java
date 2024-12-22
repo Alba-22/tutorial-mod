@@ -1,7 +1,9 @@
 package dev.alba.tutorialmod;
 
 import com.mojang.logging.LogUtils;
+import dev.alba.tutorialmod.item.ModItem;
 import net.minecraft.client.Minecraft;
+import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.BuildCreativeModeTabContentsEvent;
@@ -30,6 +32,9 @@ public class TutorialMod {
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
 
+        // Register items for the mod
+        ModItem.register(modEventBus);
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
 
@@ -45,8 +50,13 @@ public class TutorialMod {
         LOGGER.info("HELLO FROM COMMON SETUP");
     }
 
-    // Add the example block item to the building blocks tab
+    // Add items to the creative menu tabs
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
+        // Adding item "Alexandrite" to the Ingredients tab of creative menu
+        if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
+            event.accept(ModItem.ALEXANDRITE);
+            event.accept(ModItem.RAW_ALEXANDRITE);
+        }
     }
 
     // You can use SubscribeEvent and let the Event Bus discover methods to call
