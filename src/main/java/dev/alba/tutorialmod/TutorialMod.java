@@ -2,6 +2,7 @@ package dev.alba.tutorialmod;
 
 import com.mojang.logging.LogUtils;
 import dev.alba.tutorialmod.block.ModBlocks;
+import dev.alba.tutorialmod.item.ModCreativeModeTabs;
 import dev.alba.tutorialmod.item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.CreativeModeTabs;
@@ -32,6 +33,8 @@ public class TutorialMod {
 
         // Register the commonSetup method for modloading
         modEventBus.addListener(this::commonSetup);
+
+        ModCreativeModeTabs.register(modEventBus);
 
         // Register items for the mod
         ModItems.register(modEventBus);
