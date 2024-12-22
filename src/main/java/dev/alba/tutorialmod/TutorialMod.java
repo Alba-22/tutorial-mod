@@ -1,7 +1,8 @@
 package dev.alba.tutorialmod;
 
 import com.mojang.logging.LogUtils;
-import dev.alba.tutorialmod.item.ModItem;
+import dev.alba.tutorialmod.block.ModBlocks;
+import dev.alba.tutorialmod.item.ModItems;
 import net.minecraft.client.Minecraft;
 import net.minecraft.world.item.CreativeModeTabs;
 import net.minecraftforge.api.distmarker.Dist;
@@ -33,7 +34,9 @@ public class TutorialMod {
         modEventBus.addListener(this::commonSetup);
 
         // Register items for the mod
-        ModItem.register(modEventBus);
+        ModItems.register(modEventBus);
+
+        ModBlocks.register(modEventBus);
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
@@ -54,8 +57,11 @@ public class TutorialMod {
     private void addCreative(BuildCreativeModeTabContentsEvent event) {
         // Adding item "Alexandrite" to the Ingredients tab of creative menu
         if (event.getTabKey() == CreativeModeTabs.INGREDIENTS) {
-            event.accept(ModItem.ALEXANDRITE);
-            event.accept(ModItem.RAW_ALEXANDRITE);
+            event.accept(ModItems.ALEXANDRITE);
+            event.accept(ModItems.RAW_ALEXANDRITE);
+        } else if (event.getTabKey() == CreativeModeTabs.BUILDING_BLOCKS) {
+            event.accept(ModBlocks.ALEXANDRITE_BLOCK);
+            event.accept(ModBlocks.RAW_ALEXANDRITE_BLOCK);
         }
     }
 

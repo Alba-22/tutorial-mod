@@ -7,7 +7,7 @@ import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
 
-public class ModItem {
+public class ModItems {
     // Indicates to Minecraft which items this mod provides to the game
     // DeferredRegister can be used to Items, Blocks, Creative Menu tabs, etc.
     // Since its "deferred", it will be only created in the game when its needed
