@@ -33,6 +33,13 @@ public class ModItems {
             () -> new ChiselItem(new Item.Properties().durability(32))
     );
 
+    // A common food. If it's desired to have a drink, create a custom item class that extends Item and overrides the
+    // getUseAnimation method, returning a UseAnim.DRINK.
+    public static final RegistryObject<Item> MOD_FOOD = ITEMS.register(
+        "mod_food",
+            () -> new Item(new Item.Properties().food(ModFoodProperties.MOD_FOOD))
+    );
+
     public static void register(IEventBus eventBus) {
         ITEMS.register(eventBus);
     }
