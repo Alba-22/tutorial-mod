@@ -1,6 +1,7 @@
 package dev.alba.tutorialmod.item;
 
 import dev.alba.tutorialmod.TutorialMod;
+import dev.alba.tutorialmod.item.custom.ChiselItem;
 import net.minecraft.world.item.Item;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
@@ -24,6 +25,12 @@ public class ModItems {
     public static final RegistryObject<Item> RAW_ALEXANDRITE = ITEMS.register(
         "raw_alexandrite",
             () -> new Item(new Item.Properties())
+    );
+
+    public static final RegistryObject<Item> CHISEL = ITEMS.register(
+            "chisel",
+            // The durability property is a data component, which means that the item can only stacks to one
+            () -> new ChiselItem(new Item.Properties().durability(32))
     );
 
     public static void register(IEventBus eventBus) {
