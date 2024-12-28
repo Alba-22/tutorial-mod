@@ -1,6 +1,7 @@
 package dev.alba.tutorialmod.block;
 
 import dev.alba.tutorialmod.TutorialMod;
+import dev.alba.tutorialmod.block.custom.MagicBlock;
 import dev.alba.tutorialmod.item.ModItems;
 import net.minecraft.util.valueproviders.UniformInt;
 import net.minecraft.world.item.BlockItem;
@@ -50,6 +51,11 @@ public class ModBlocks {
                     UniformInt.of(3, 6),
                     BlockBehaviour.Properties.of().strength(5f).requiresCorrectToolForDrops().sound(SoundType.DEEPSLATE)
             )
+    );
+
+    public static final RegistryObject<Block> MAGIC_BLOCK = registerBlock(
+        "magic_block",
+            () -> new MagicBlock(BlockBehaviour.Properties.of().strength(2f).requiresCorrectToolForDrops())
     );
 
     private static <T extends  Block> RegistryObject<T> registerBlock(String name, Supplier<T> block) {
