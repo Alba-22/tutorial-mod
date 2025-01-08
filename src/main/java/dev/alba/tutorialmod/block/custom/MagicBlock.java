@@ -1,6 +1,6 @@
 package dev.alba.tutorialmod.block.custom;
 
-import dev.alba.tutorialmod.item.ModItems;
+import dev.alba.tutorialmod.util.ModTags;
 import net.minecraft.core.BlockPos;
 import net.minecraft.network.chat.Component;
 import net.minecraft.sounds.SoundEvents;
@@ -32,11 +32,22 @@ public class MagicBlock extends Block {
     // top of the block in a particular order, we gonna need a custom block entity
     public void stepOn(Level pLevel, BlockPos pPos, BlockState pState, Entity pEntity) {
         if (pEntity instanceof ItemEntity itemEntity) {
-            if (itemEntity.getItem().getItem() == ModItems.RAW_ALEXANDRITE.get()) {
+            if (isTransformableItem(itemEntity.getItem())) {
                 itemEntity.setItem(new ItemStack(Items.DIAMOND, itemEntity.getItem().getCount()));
             }
         }
         super.stepOn(pLevel, pPos, pState, pEntity);
+    }
+
+    // Using tags, allow that other mods add items to the tag and share the feature
+    // Tags can be used too in the recipe's JSON. In the key object, inside the pattern, change "item" for "tag"
+    // "key": {
+    //    "A": {
+    //     "tag": "tutorialmod:transformable_items"
+    //   }
+    // }
+    private boolean isTransformableItem(ItemStack item) {
+        return item.is(ModTags.Items.TRANSFORMABLE_ITEMS);
     }
 
     @Override
