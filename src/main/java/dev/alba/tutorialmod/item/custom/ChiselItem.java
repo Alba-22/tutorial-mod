@@ -1,6 +1,8 @@
 package dev.alba.tutorialmod.item.custom;
 
 import dev.alba.tutorialmod.block.ModBlocks;
+import net.minecraft.client.gui.screens.Screen;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.sounds.SoundEvents;
@@ -13,11 +15,13 @@ import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraft.world.item.context.UseOnContext;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
 
+import java.util.List;
 import java.util.Map;
 import java.util.Objects;
 
@@ -71,5 +75,17 @@ public class ChiselItem extends Item {
     // Method for using an item on holding right click, like when using a bow
     public int getUseDuration(ItemStack pStack, LivingEntity pEntity) {
         return super.getUseDuration(pStack, pEntity);
+    }
+
+    @Override
+    public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
+        if (Screen.hasShiftDown()) {
+            pTooltipComponents.add(Component.translatable("tooltip.tutorialmod.chisel.shift_down"));
+            // For line break, add another component
+            // pTooltipComponents.add(Component.translatable("tooltip.tutorialmod.chisel.shift_down2"));
+        } else {
+            pTooltipComponents.add(Component.translatable("tooltip.tutorialmod.chisel"));
+        }
+        super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
     }
 }

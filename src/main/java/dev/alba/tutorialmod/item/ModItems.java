@@ -3,11 +3,16 @@ package dev.alba.tutorialmod.item;
 import dev.alba.tutorialmod.TutorialMod;
 import dev.alba.tutorialmod.item.custom.ChiselItem;
 import dev.alba.tutorialmod.item.custom.FuelItem;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.TooltipFlag;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 import net.minecraftforge.registries.RegistryObject;
+
+import java.util.List;
 
 public class ModItems {
     // Indicates to Minecraft which items this mod provides to the game
@@ -38,7 +43,15 @@ public class ModItems {
     // getUseAnimation method, returning a UseAnim.DRINK.
     public static final RegistryObject<Item> MOD_FOOD = ITEMS.register(
         "mod_food",
-            () -> new Item(new Item.Properties().food(ModFoodProperties.MOD_FOOD))
+            () -> new Item(new Item.Properties().food(ModFoodProperties.MOD_FOOD)) {
+                // Anonymous Class - Allows to override any methods of the parent class(Item, in this case)
+
+                @Override
+                public void appendHoverText(ItemStack pStack, TooltipContext pContext, List<Component> pTooltipComponents, TooltipFlag pTooltipFlag) {
+                    pTooltipComponents.add(Component.translatable("tooltip.tutorialmod.mod_food"));
+                    super.appendHoverText(pStack, pContext, pTooltipComponents, pTooltipFlag);
+                }
+            }
     );
 
     public static final RegistryObject<Item> AURORA_ASHES = ITEMS.register(
